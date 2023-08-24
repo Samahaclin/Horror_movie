@@ -1,0 +1,106 @@
+---
+title: "Horror Movies"
+output: html_document
+date: "2023-08-24"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+```{r}
+Horror_movies <- read.csv("horror_movies.csv")
+```
+
+```{r}
+install.packages("datapasta")
+```
+```{r}
+install.packages("ggpubr")
+```
+
+
+```{r}
+data.table::fread("lang", data.table = FALSE)
+```
+
+```{r}
+lang <- data.table::fread("lang", data.table = FALSE, fill = TRUE)
+```
+
+```{r}
+View(lang)
+```
+
+
+```{r}
+library(tidyverse)
+library(ggplot2)
+library(dplyr)
+library(ggpubr)
+```
+
+```{r}
+str(Horror_movies)
+```
+
+
+```{r}
+sd_horror_movies <- Horror_movies %>% select("id","original_title","original_language","release_date","popularity","vote_count","vote_average","budget","revenue","genre_names", "adult")
+```
+
+```{r}
+joined_sd_horror_movies <- left_join(sd_horror_movies, lang, by=c("original_language"="aa"))
+```
+
+```{r}
+joined_sd_horror_movies <- joined_sd_horror_movies %>% relocate(Afar,.after="original_language") %>% rename(Language=Afar)
+```
+
+
+```{r}
+joined_sd_horror_movies %>% group_by(Afar) %>% summarise(Number=n()) %>% arrange(desc(Number))
+```
+
+```{r}
+sd_horror_movies_w500000 <- joined_sd_horror_movies %>% filter(budget >= 500000, vote_average > 1, Language=="English"|Language=="Spanish; Castilian"|Language=="Japanese")
+```
+
+```{r}
+range(sd_horror_movies$budget)
+```
+
+```{r}
+lr <- sd_horror_movies_w500000 %>% group_by(Language) %>% do(model=lm(formula=revenue~log(budget), .))
+lr
+```
+
+```{r}
+lr[[2]][[1]]$coefficients
+lr[[2]][[2]]$coefficients
+lr[[2]][[3]]$coefficients
+```
+
+
+```{r}
+av_vote_revenue_d <- ggplot(sd_horror_movies_w500000, mapping=aes(x=budget, y=revenue, color=Language)) + geom_point() + scale_x_log10() + facet_grid(cols=vars(Language)) + geom_smooth(method="lm", formula=y~log(x), color="black", level=FALSE) + xlab("Budget (Log scale)") + ylab("Revenue") + ggtitle("Budget vs. Revenue") + theme_bw()
+av_vote_revenue_d 
+```
+
+```{r}
+av_vote_budget_d <- ggplot(sd_horror_movies_w500000, mapping=aes(x=budget, y=vote_average, color=Language)) + geom_point() + scale_x_log10() + facet_grid(cols=vars(Language)) + geom_smooth(method="lm", color="black", level=FALSE) + stat_cor()
+
+
+av_vote_budget_d
+```
+
+
+```{r}
+av_vote_popu_d <- ggplot(sd_horror_movies_w500000, mapping=aes(x=budget, y=popularity, color=Language)) + geom_point() + scale_x_log10() + facet_grid(cols=vars(Language)) + geom_smooth(method="lm", color="black", level=FALSE) + stat_cor()
+av_vote_popu_d
+```
