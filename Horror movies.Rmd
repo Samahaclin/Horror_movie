@@ -1,6 +1,9 @@
 ---
 title: "Horror Movies"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
+  word_document: default
 date: "2023-08-24"
 ---
 
@@ -8,99 +11,205 @@ date: "2023-08-24"
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+Installing the required packaged.
+```{r, eval=FALSE}
+install.packages("tidyverse")
+install.packages("ggplot2")
+install.packages("datapasta")
+install.packages("ggpubr")
+```
+
 ## R Markdown
+```{r}
+library(tidyverse)
+library(ggplot2)
+library(datapasta)
+library(ggpubr)
+```
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+Importing the datafile from local storage. Data is downloaded from TidyTuesday github repository.
 ```{r}
 Horror_movies <- read.csv("horror_movies.csv")
 ```
 
-```{r}
-install.packages("datapasta")
-```
-```{r}
-install.packages("ggpubr")
-```
-
-
-```{r}
-data.table::fread("lang", data.table = FALSE)
-```
-
-```{r}
-lang <- data.table::fread("lang", data.table = FALSE, fill = TRUE)
-```
-
-```{r}
-View(lang)
-```
-
-
-```{r}
-library(tidyverse)
-library(ggplot2)
-library(dplyr)
-library(ggpubr)
-```
-
+Get a overview of the structure of our data
 ```{r}
 str(Horror_movies)
 ```
 
-
+We select the variables which is of interest. 
 ```{r}
-sd_horror_movies <- Horror_movies %>% select("id","original_title","original_language","release_date","popularity","vote_count","vote_average","budget","revenue","genre_names", "adult")
+sd_horror_movies <- Horror_movies %>% select("id","original_title","original_language","popularity","vote_average","budget","revenue")
 ```
 
+We look at our subset data, and we can see that the languages are annotated with abbreviations. 
 ```{r}
-joined_sd_horror_movies <- left_join(sd_horror_movies, lang, by=c("original_language"="aa"))
+str(sd_horror_movies)
 ```
 
+To get the actual names of the language from the abbreviations we copy a table from this website: https://www.science.co.il/language/Codes.php and saved it into a new R-script. We converted it into a table. 
+```{r}
+lang <- data.table::fread("lang", data.table = FALSE, fill = TRUE)
+```
+
+We view our language data:
+```{r}
+head(lang)
+```
+
+Then we join our horror movie data with our language data, but only adding the Afar (language) column:
+```{r}
+joined_sd_horror_movies <- left_join(sd_horror_movies, lang, by=c("original_language"="aa")) %>% select(-"aar", -"afar")
+```
+
+Relocating Afar next original language column and renaming Afar to language:
 ```{r}
 joined_sd_horror_movies <- joined_sd_horror_movies %>% relocate(Afar,.after="original_language") %>% rename(Language=Afar)
 ```
 
-
+We arrange the data to find the top three language of the movies:
 ```{r}
-joined_sd_horror_movies %>% group_by(Afar) %>% summarise(Number=n()) %>% arrange(desc(Number))
+joined_sd_horror_movies %>% group_by(Language) %>% summarise(Number=n()) %>% arrange(desc(Number))
 ```
 
+Making a new dataset with only movies with a budget above 500.000(unit?), vote average above 1 and only of the top three language of movies:
 ```{r}
 sd_horror_movies_w500000 <- joined_sd_horror_movies %>% filter(budget >= 500000, vote_average > 1, Language=="English"|Language=="Spanish; Castilian"|Language=="Japanese")
 ```
 
+We examine whether a larger budget gives the movies a larger revenue by plotting scatter plot of budget vs. revenue for the three top language of movies(English, Japanese, Spanish) and linear regression:
 ```{r}
-range(sd_horror_movies$budget)
-```
 
-```{r}
-lr <- sd_horror_movies_w500000 %>% group_by(Language) %>% do(model=lm(formula=revenue~log(budget), .))
-lr
-```
-
-```{r}
-lr[[2]][[1]]$coefficients
-lr[[2]][[2]]$coefficients
-lr[[2]][[3]]$coefficients
-```
-
-
-```{r}
-av_vote_revenue_d <- ggplot(sd_horror_movies_w500000, mapping=aes(x=budget, y=revenue, color=Language)) + geom_point() + scale_x_log10() + facet_grid(cols=vars(Language)) + geom_smooth(method="lm", formula=y~log(x), color="black", level=FALSE) + xlab("Budget (Log scale)") + ylab("Revenue") + ggtitle("Budget vs. Revenue") + theme_bw()
+av_vote_revenue_d <- ggplot(sd_horror_movies_w500000, mapping=aes(x=budget, y=revenue, color=Language)) + geom_point() + scale_x_log10() + facet_grid(cols=vars(Language)) + geom_smooth(method="lm", formula=y~log(x), color="black", level=FALSE) + xlab("Budget (Log scale)") + ylab("Revenue") + ggtitle("Budget vs. Revenue") + theme_bw() 
 av_vote_revenue_d 
 ```
 
+We look into the linear regression for each the top three movie language estimating the R-squared and p-value to test the model fit. 
 ```{r}
-av_vote_budget_d <- ggplot(sd_horror_movies_w500000, mapping=aes(x=budget, y=vote_average, color=Language)) + geom_point() + scale_x_log10() + facet_grid(cols=vars(Language)) + geom_smooth(method="lm", color="black", level=FALSE) + stat_cor()
+lr1 <- sd_horror_movies_w500000 %>% group_by(Language) %>% do(model=lm(formula=revenue~log(budget), .))
+lr1
 
+summary(lr1[[2]][[1]])$coefficients
+
+summary(lr1[[2]][[1]])$r.squared
+
+summary(lr1[[2]][[2]])$coefficients
+
+summary(lr1[[2]][[2]])$r.squared
+
+summary(lr1[[2]][[3]])$coefficients
+
+summary(lr1[[2]][[3]])$r.squared
+```
+Putting the R-squared and p-value for each group into a dataframe:
+```{r}
+dat_text <- data.frame(
+  label = c("R = 0.247, p=0.001", "R = 0.298, p=0.001", "R = 0.070, p=0.144"),
+  Language   = c("English", "Japanese", "Spanish; Castilian")
+)
+```
+
+Adding the R-squared and p-value for each group into the figure:
+```{r}
+
+av_vote_revenue_d_wn <- ggplot(sd_horror_movies_w500000, mapping=aes(x=budget, y=revenue, color=Language)) + geom_point() + scale_x_log10() + facet_grid(cols=vars(Language)) + geom_smooth(method="lm", formula=y~log(x), color="black", level=FALSE) + xlab("Budget (Log scale)") + ylab("Revenue") + ggtitle("Budget vs. Revenue") + theme_bw() + geom_text(
+  data    = dat_text,
+  mapping = aes(x = 1e+05, y = 6.3e+08, label = label),
+  hjust   = -0.1,
+  vjust   = -1
+)
+av_vote_revenue_d_wn 
+```
+We have budget of the movies on X axis and its revenue on the Y axis. We looked into the top three language movies. Budget of movies in  all three language found to have a very low positive correlation with its revenue. However, only English and Japanese movies showed a significant correlation.
+
+
+We examine whether a larger budget gives the movies a higher vote average by plotting scatter plot of budget vs. vote average for the three top language of movies(English, Japanese, Spanish) and linear regression:
+```{r}
+av_vote_budget_d <- ggplot(sd_horror_movies_w500000, mapping=aes(x=budget, y=vote_average, color=Language)) + geom_point() + scale_x_log10() + facet_grid(cols=vars(Language)) + geom_smooth(method="lm", color="black", level=FALSE) + xlab("Budget (Log scale)") + ylab("Vote average") + ggtitle("Budget vs. vote average") + theme_bw() 
 
 av_vote_budget_d
 ```
-
-
+We look into the linear regression for each the top three movie language estimating the R-squared and p-value to test the model fit. 
 ```{r}
-av_vote_popu_d <- ggplot(sd_horror_movies_w500000, mapping=aes(x=budget, y=popularity, color=Language)) + geom_point() + scale_x_log10() + facet_grid(cols=vars(Language)) + geom_smooth(method="lm", color="black", level=FALSE) + stat_cor()
-av_vote_popu_d
+lr2 <- sd_horror_movies_w500000 %>% group_by(Language) %>% do(model=lm(formula=vote_average~log(budget), .))
+lr2
+
+summary(lr2[[2]][[1]])$coefficients
+
+summary(lr2[[2]][[1]])$r.squared
+
+summary(lr2[[2]][[2]])$coefficients
+
+summary(lr2[[2]][[2]])$r.squared
+
+summary(lr2[[2]][[3]])$coefficients
+
+summary(lr2[[2]][[3]])$r.squared
 ```
+
+Putting the R-squared and p-value for each group into a dataframe:
+```{r}
+dat_text2 <- data.frame(
+  label = c("R = 0.127, p=0.001", "R = 0.092, p=0.068", "R = 0.034, p=0.309"),
+  Language   = c("English", "Japanese", "Spanish; Castilian")
+)
+```
+
+Adding the R-squared and p-value for each group into the figure:
+```{r}
+av_vote_budget_d_wn <- ggplot(sd_horror_movies_w500000, mapping=aes(x=budget, y=vote_average, color=Language)) + geom_point() + scale_x_log10() + facet_grid(cols=vars(Language)) + geom_smooth(method="lm", color="black", level=FALSE) + xlab("Budget (Log scale)") + ylab("Vote average") + ggtitle("Budget vs. vote average") + theme_bw() + geom_text(
+  data    = dat_text2,
+  mapping = aes(x = 1e+05, y = 9, label = label),
+  hjust   = -0.1,
+  vjust   = -1
+)
+
+av_vote_budget_d_wn
+```
+We have budget of the movies on X axis and its vote average on the Y axis. We looked into the top three language movies. Budget of movies in  all three language found to have a very low positive correlation with its vote average. However, only English movies showed a significant correlation.
+
+We examine whether larger budget movies has higher popularity by plotting scatter plot of budget vs. popularity for the three top language of movies(English, Japanese, Spanish) and linear regression:
+```{r}
+popu_budget_d <- ggplot(sd_horror_movies_w500000, mapping=aes(x=budget, y=popularity, color=Language)) + geom_point() + scale_x_log10() + facet_grid(cols=vars(Language)) + geom_smooth(method="lm", color="black", level=FALSE) + xlab("Budget (Log scale)") + ylab("Popularity") + ggtitle("Budget vs. popularity") + theme_bw()
+popu_budget_d
+```
+
+We look into the linear regression for each the top three movie language estimating the R-squared and p-value to test the model fit. 
+```{r}
+lr3 <- sd_horror_movies_w500000 %>% group_by(Language) %>% do(model=lm(formula=popularity~log(budget), .))
+lr3
+
+summary(lr3[[2]][[1]])$coefficients
+
+summary(lr3[[2]][[1]])$r.squared
+
+summary(lr3[[2]][[2]])$coefficients
+
+summary(lr3[[2]][[2]])$r.squared
+
+summary(lr3[[2]][[3]])$coefficients
+
+summary(lr3[[2]][[3]])$r.squared
+```
+
+Putting the R-squared and p-value for each group into a dataframe:
+```{r}
+dat_text3 <- data.frame(
+  label = c("R = 0.048, p=0.001", "R = 0.016, p=0.459", "R = 0.132, p=0.041"),
+  Language   = c("English", "Japanese", "Spanish; Castilian")
+)
+```
+
+Adding the R-squared and p-value for each group into the figure:
+```{r}
+popu_budget_d_wn <- ggplot(sd_horror_movies_w500000, mapping=aes(x=budget, y=popularity, color=Language)) + geom_point() + scale_x_log10() + facet_grid(cols=vars(Language)) + geom_smooth(method="lm", color="black", level=FALSE) + xlab("Budget (Log scale)") + ylab("Popularity") + ggtitle("Budget vs. popularity") + theme_bw() + geom_text(
+  data    = dat_text3,
+  mapping = aes(x = 1e+05, y = 1550, label = label),
+  hjust   = -0.1,
+  vjust   = -1
+)
+
+popu_budget_d_wn
+```
+We have budget of the movies on X axis and its popularity on the Y axis. We looked into the top three language movies. Budget of movies in  all three language were found to have a very low positive correlation with its popularity. However, only English movies showed a significant correlation.
+

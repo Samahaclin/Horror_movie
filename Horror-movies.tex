@@ -1,0 +1,716 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={Horror Movies},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Horror Movies}
+\author{}
+\date{\vspace{-2.5em}2023-08-24}
+
+\begin{document}
+\maketitle
+
+Installing the required packaged.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{install.packages}\NormalTok{(}\StringTok{"tidyverse"}\NormalTok{)}
+\FunctionTok{install.packages}\NormalTok{(}\StringTok{"ggplot2"}\NormalTok{)}
+\FunctionTok{install.packages}\NormalTok{(}\StringTok{"datapasta"}\NormalTok{)}
+\FunctionTok{install.packages}\NormalTok{(}\StringTok{"ggpubr"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{r-markdown}{%
+\subsection{R Markdown}\label{r-markdown}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## -- Attaching core tidyverse packages ------------------------ tidyverse 2.0.0 --
+## v dplyr     1.1.2     v readr     2.1.4
+## v forcats   1.0.0     v stringr   1.5.0
+## v ggplot2   3.4.3     v tibble    3.2.1
+## v lubridate 1.9.2     v tidyr     1.3.0
+## v purrr     1.0.2     
+## -- Conflicts ------------------------------------------ tidyverse_conflicts() --
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()
+## i Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\FunctionTok{library}\NormalTok{(datapasta)}
+\FunctionTok{library}\NormalTok{(ggpubr)}
+\end{Highlighting}
+\end{Shaded}
+
+Importing the datafile from local storage. Data is downloaded from
+TidyTuesday github repository.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Horror\_movies }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"horror\_movies.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Get a overview of the structure of our data
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{str}\NormalTok{(Horror\_movies)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 'data.frame':    32540 obs. of  20 variables:
+##  $ id               : int  760161 760741 882598 756999 772450 1014226 717728 762504 927341 760104 ...
+##  $ original_title   : chr  "Orphan: First Kill" "Beast" "Smile" "The Black Phone" ...
+##  $ title            : chr  "Orphan: First Kill" "Beast" "Smile" "The Black Phone" ...
+##  $ original_language: chr  "en" "en" "en" "en" ...
+##  $ overview         : chr  "After escaping from an Estonian psychiatric facility, Leena Klammer travels to America by impersonating Esther,"| __truncated__ "A recently widowed man and his two teenage daughters travel to a game reserve in South Africa. However, their j"| __truncated__ "After witnessing a bizarre, traumatic incident involving a patient, Dr. Rose Cotter starts experiencing frighte"| __truncated__ "Finney Blake, a shy but clever 13-year-old boy, is abducted by a sadistic killer and trapped in a soundproof ba"| __truncated__ ...
+##  $ tagline          : chr  "There's always been something wrong with Esther." "Fight for family." "Once you see it, it’s too late." "Never talk to strangers." ...
+##  $ release_date     : chr  "2022-07-27" "2022-08-11" "2022-09-23" "2022-06-22" ...
+##  $ poster_path      : chr  "/pHkKbIRoCe7zIFvqan9LFSaQAde.jpg" "/xIGr7UHsKf0URWmyyd5qFMAq4d8.jpg" "/hiaeZKzwsk4y4atFhmncO5KRxeT.jpg" "/lr11mCT85T1JanlgjMuhs9nMht4.jpg" ...
+##  $ popularity       : num  5089 2172 1864 1071 1021 ...
+##  $ vote_count       : int  902 584 114 2736 83 1 125 1684 73 1035 ...
+##  $ vote_average     : num  6.9 7.1 6.8 7.9 7 1 5.8 7 6.5 6.8 ...
+##  $ budget           : int  0 0 17000000 18800000 0 0 20000000 68000000 0 10000000 ...
+##  $ revenue          : int  9572765 56000000 45000000 161000000 0 0 2892594 170800000 0 14257609 ...
+##  $ runtime          : int  99 93 115 103 0 0 88 130 90 106 ...
+##  $ status           : chr  "Released" "Released" "Released" "Released" ...
+##  $ adult            : logi  FALSE FALSE FALSE FALSE FALSE FALSE ...
+##  $ backdrop_path    : chr  "/5GA3vV1aWWHTSDO5eno8V5zDo8r.jpg" "/2k9tBql5GYH328Krj66tDT9LtFZ.jpg" "/mVNPfpydornVe4H4UCIk7WevWjf.jpg" "/AfvIjhDu9p64jKcmohS4hsPG95Q.jpg" ...
+##  $ genre_names      : chr  "Horror, Thriller" "Adventure, Drama, Horror" "Horror, Mystery, Thriller" "Horror, Thriller" ...
+##  $ collection       : int  760193 NA NA NA NA NA 94899 NA NA 950289 ...
+##  $ collection_name  : chr  "Orphan Collection" NA NA NA ...
+\end{verbatim}
+
+We select the variables which is of interest.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sd\_horror\_movies }\OtherTok{\textless{}{-}}\NormalTok{ Horror\_movies }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{select}\NormalTok{(}\StringTok{"id"}\NormalTok{,}\StringTok{"original\_title"}\NormalTok{,}\StringTok{"original\_language"}\NormalTok{,}\StringTok{"popularity"}\NormalTok{,}\StringTok{"vote\_average"}\NormalTok{,}\StringTok{"budget"}\NormalTok{,}\StringTok{"revenue"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+We look at our subset data, and we can see that the languages are
+annotated with abbreviations.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{str}\NormalTok{(sd\_horror\_movies)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 'data.frame':    32540 obs. of  7 variables:
+##  $ id               : int  760161 760741 882598 756999 772450 1014226 717728 762504 927341 760104 ...
+##  $ original_title   : chr  "Orphan: First Kill" "Beast" "Smile" "The Black Phone" ...
+##  $ original_language: chr  "en" "en" "en" "en" ...
+##  $ popularity       : num  5089 2172 1864 1071 1021 ...
+##  $ vote_average     : num  6.9 7.1 6.8 7.9 7 1 5.8 7 6.5 6.8 ...
+##  $ budget           : int  0 0 17000000 18800000 0 0 20000000 68000000 0 10000000 ...
+##  $ revenue          : int  9572765 56000000 45000000 161000000 0 0 2892594 170800000 0 14257609 ...
+\end{verbatim}
+
+To get the actual names of the language from the abbreviations we copy a
+table from this website:
+\url{https://www.science.co.il/language/Codes.php} and saved it into a
+new R-script. We converted it into a table.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{lang }\OtherTok{\textless{}{-}}\NormalTok{ data.table}\SpecialCharTok{::}\FunctionTok{fread}\NormalTok{(}\StringTok{"lang"}\NormalTok{, }\AttributeTok{data.table =} \ConstantTok{FALSE}\NormalTok{, }\AttributeTok{fill =} \ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+We view our language data:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{head}\NormalTok{(lang)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##        Afar aa aar      afar
+## 1 Abkhazian ab abk   abkhaze
+## 2   Avestan ae ave avestique
+## 3 Afrikaans af afr afrikaans
+## 4      Akan ak aka      akan
+## 5   Amharic am amh amharique
+## 6 Aragonese an arg aragonais
+\end{verbatim}
+
+Then we join our horror movie data with our language data, but only
+adding the Afar (language) column:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{joined\_sd\_horror\_movies }\OtherTok{\textless{}{-}} \FunctionTok{left\_join}\NormalTok{(sd\_horror\_movies, lang, }\AttributeTok{by=}\FunctionTok{c}\NormalTok{(}\StringTok{"original\_language"}\OtherTok{=}\StringTok{"aa"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{select}\NormalTok{(}\SpecialCharTok{{-}}\StringTok{"aar"}\NormalTok{, }\SpecialCharTok{{-}}\StringTok{"afar"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Relocating Afar next original language column and renaming Afar to
+language:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{joined\_sd\_horror\_movies }\OtherTok{\textless{}{-}}\NormalTok{ joined\_sd\_horror\_movies }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{relocate}\NormalTok{(Afar,}\AttributeTok{.after=}\StringTok{"original\_language"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{rename}\NormalTok{(}\AttributeTok{Language=}\NormalTok{Afar)}
+\end{Highlighting}
+\end{Shaded}
+
+We arrange the data to find the top three language of the movies:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{joined\_sd\_horror\_movies }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{group\_by}\NormalTok{(Language) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{summarise}\NormalTok{(}\AttributeTok{Number=}\FunctionTok{n}\NormalTok{()) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{arrange}\NormalTok{(}\FunctionTok{desc}\NormalTok{(Number))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 95 x 2
+##    Language           Number
+##    <chr>               <int>
+##  1 English             21923
+##  2 Spanish; Castilian   1661
+##  3 Japanese             1639
+##  4 Portuguese            676
+##  5 German                631
+##  6 Indonesian            604
+##  7 French                591
+##  8 Italian               575
+##  9 <NA>                  523
+## 10 Chinese               496
+## # i 85 more rows
+\end{verbatim}
+
+Making a new dataset with only movies with a budget above
+500.000(unit?), vote average above 1 and only of the top three language
+of movies:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sd\_horror\_movies\_w500000 }\OtherTok{\textless{}{-}}\NormalTok{ joined\_sd\_horror\_movies }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{filter}\NormalTok{(budget }\SpecialCharTok{\textgreater{}=} \DecValTok{500000}\NormalTok{, vote\_average }\SpecialCharTok{\textgreater{}} \DecValTok{1}\NormalTok{, Language}\SpecialCharTok{==}\StringTok{"English"}\SpecialCharTok{|}\NormalTok{Language}\SpecialCharTok{==}\StringTok{"Spanish; Castilian"}\SpecialCharTok{|}\NormalTok{Language}\SpecialCharTok{==}\StringTok{"Japanese"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+We examine whether a larger budget gives the movies a larger revenue by
+plotting scatter plot of budget vs.~revenue for the three top language
+of movies(English, Japanese, Spanish) and linear regression:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{av\_vote\_revenue\_d }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(sd\_horror\_movies\_w500000, }\AttributeTok{mapping=}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{budget, }\AttributeTok{y=}\NormalTok{revenue, }\AttributeTok{color=}\NormalTok{Language)) }\SpecialCharTok{+} \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+} \FunctionTok{scale\_x\_log10}\NormalTok{() }\SpecialCharTok{+} \FunctionTok{facet\_grid}\NormalTok{(}\AttributeTok{cols=}\FunctionTok{vars}\NormalTok{(Language)) }\SpecialCharTok{+} \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{method=}\StringTok{"lm"}\NormalTok{, }\AttributeTok{formula=}\NormalTok{y}\SpecialCharTok{\textasciitilde{}}\FunctionTok{log}\NormalTok{(x), }\AttributeTok{color=}\StringTok{"black"}\NormalTok{, }\AttributeTok{level=}\ConstantTok{FALSE}\NormalTok{) }\SpecialCharTok{+} \FunctionTok{xlab}\NormalTok{(}\StringTok{"Budget (Log scale)"}\NormalTok{) }\SpecialCharTok{+} \FunctionTok{ylab}\NormalTok{(}\StringTok{"Revenue"}\NormalTok{) }\SpecialCharTok{+} \FunctionTok{ggtitle}\NormalTok{(}\StringTok{"Budget vs. Revenue"}\NormalTok{) }\SpecialCharTok{+} \FunctionTok{theme\_bw}\NormalTok{() }
+\NormalTok{av\_vote\_revenue\_d }
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Horror-movies_files/figure-latex/unnamed-chunk-13-1.pdf}
+
+We look into the linear regression for each the top three movie language
+estimating the R-squared and p-value to test the model fit.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{lr1 }\OtherTok{\textless{}{-}}\NormalTok{ sd\_horror\_movies\_w500000 }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{group\_by}\NormalTok{(Language) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{do}\NormalTok{(}\AttributeTok{model=}\FunctionTok{lm}\NormalTok{(}\AttributeTok{formula=}\NormalTok{revenue}\SpecialCharTok{\textasciitilde{}}\FunctionTok{log}\NormalTok{(budget), .))}
+\NormalTok{lr1}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 3 x 2
+## # Rowwise: 
+##   Language           model 
+##   <chr>              <list>
+## 1 English            <lm>  
+## 2 Japanese           <lm>  
+## 3 Spanish; Castilian <lm>
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(lr1[[}\DecValTok{2}\NormalTok{]][[}\DecValTok{1}\NormalTok{]])}\SpecialCharTok{$}\NormalTok{coefficients}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##               Estimate Std. Error   t value     Pr(>|t|)
+## (Intercept) -309387952 14753716.8 -20.97017 2.541957e-86
+## log(budget)   21949135   964560.4  22.75558 2.356515e-99
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(lr1[[}\DecValTok{2}\NormalTok{]][[}\DecValTok{1}\NormalTok{]])}\SpecialCharTok{$}\NormalTok{r.squared}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.2471895
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(lr1[[}\DecValTok{2}\NormalTok{]][[}\DecValTok{2}\NormalTok{]])}\SpecialCharTok{$}\NormalTok{coefficients}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##               Estimate Std. Error   t value     Pr(>|t|)
+## (Intercept) -121550253   34109251 -3.563557 0.0010800986
+## log(budget)    8800481    2282173  3.856185 0.0004722738
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(lr1[[}\DecValTok{2}\NormalTok{]][[}\DecValTok{2}\NormalTok{]])}\SpecialCharTok{$}\NormalTok{r.squared}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.2981775
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(lr1[[}\DecValTok{2}\NormalTok{]][[}\DecValTok{3}\NormalTok{]])}\SpecialCharTok{$}\NormalTok{coefficients}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##              Estimate Std. Error   t value  Pr(>|t|)
+## (Intercept) -63932490   46824830 -1.365354 0.1822932
+## log(budget)   4785220    3189193  1.500449 0.1439503
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(lr1[[}\DecValTok{2}\NormalTok{]][[}\DecValTok{3}\NormalTok{]])}\SpecialCharTok{$}\NormalTok{r.squared}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.06980626
+\end{verbatim}
+
+Putting the R-squared and p-value for each group into a dataframe:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dat\_text }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}
+  \AttributeTok{label =} \FunctionTok{c}\NormalTok{(}\StringTok{"R = 0.247, p=0.001"}\NormalTok{, }\StringTok{"R = 0.298, p=0.001"}\NormalTok{, }\StringTok{"R = 0.070, p=0.144"}\NormalTok{),}
+  \AttributeTok{Language   =} \FunctionTok{c}\NormalTok{(}\StringTok{"English"}\NormalTok{, }\StringTok{"Japanese"}\NormalTok{, }\StringTok{"Spanish; Castilian"}\NormalTok{)}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Adding the R-squared and p-value for each group into the figure:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{av\_vote\_revenue\_d\_wn }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(sd\_horror\_movies\_w500000, }\AttributeTok{mapping=}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{budget, }\AttributeTok{y=}\NormalTok{revenue, }\AttributeTok{color=}\NormalTok{Language)) }\SpecialCharTok{+} \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+} \FunctionTok{scale\_x\_log10}\NormalTok{() }\SpecialCharTok{+} \FunctionTok{facet\_grid}\NormalTok{(}\AttributeTok{cols=}\FunctionTok{vars}\NormalTok{(Language)) }\SpecialCharTok{+} \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{method=}\StringTok{"lm"}\NormalTok{, }\AttributeTok{formula=}\NormalTok{y}\SpecialCharTok{\textasciitilde{}}\FunctionTok{log}\NormalTok{(x), }\AttributeTok{color=}\StringTok{"black"}\NormalTok{, }\AttributeTok{level=}\ConstantTok{FALSE}\NormalTok{) }\SpecialCharTok{+} \FunctionTok{xlab}\NormalTok{(}\StringTok{"Budget (Log scale)"}\NormalTok{) }\SpecialCharTok{+} \FunctionTok{ylab}\NormalTok{(}\StringTok{"Revenue"}\NormalTok{) }\SpecialCharTok{+} \FunctionTok{ggtitle}\NormalTok{(}\StringTok{"Budget vs. Revenue"}\NormalTok{) }\SpecialCharTok{+} \FunctionTok{theme\_bw}\NormalTok{() }\SpecialCharTok{+} \FunctionTok{geom\_text}\NormalTok{(}
+  \AttributeTok{data    =}\NormalTok{ dat\_text,}
+  \AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =} \FloatTok{1e+05}\NormalTok{, }\AttributeTok{y =} \FloatTok{6.3e+08}\NormalTok{, }\AttributeTok{label =}\NormalTok{ label),}
+  \AttributeTok{hjust   =} \SpecialCharTok{{-}}\FloatTok{0.1}\NormalTok{,}
+  \AttributeTok{vjust   =} \SpecialCharTok{{-}}\DecValTok{1}
+\NormalTok{)}
+\NormalTok{av\_vote\_revenue\_d\_wn }
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Horror-movies_files/figure-latex/unnamed-chunk-16-1.pdf}
+We have budget of the movies on X axis and its revenue on the Y axis. We
+looked into the top three language movies. Budget of movies in all three
+language found to have a very low positive correlation with its revenue.
+However, only English and Japanese movies showed a significant
+correlation.
+
+We examine whether a larger budget gives the movies a higher vote
+average by plotting scatter plot of budget vs.~vote average for the
+three top language of movies(English, Japanese, Spanish) and linear
+regression:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{av\_vote\_budget\_d }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(sd\_horror\_movies\_w500000, }\AttributeTok{mapping=}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{budget, }\AttributeTok{y=}\NormalTok{vote\_average, }\AttributeTok{color=}\NormalTok{Language)) }\SpecialCharTok{+} \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+} \FunctionTok{scale\_x\_log10}\NormalTok{() }\SpecialCharTok{+} \FunctionTok{facet\_grid}\NormalTok{(}\AttributeTok{cols=}\FunctionTok{vars}\NormalTok{(Language)) }\SpecialCharTok{+} \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{method=}\StringTok{"lm"}\NormalTok{, }\AttributeTok{color=}\StringTok{"black"}\NormalTok{, }\AttributeTok{level=}\ConstantTok{FALSE}\NormalTok{) }\SpecialCharTok{+} \FunctionTok{xlab}\NormalTok{(}\StringTok{"Budget (Log scale)"}\NormalTok{) }\SpecialCharTok{+} \FunctionTok{ylab}\NormalTok{(}\StringTok{"Vote average"}\NormalTok{) }\SpecialCharTok{+} \FunctionTok{ggtitle}\NormalTok{(}\StringTok{"Budget vs. vote average"}\NormalTok{) }\SpecialCharTok{+} \FunctionTok{theme\_bw}\NormalTok{() }
+
+\NormalTok{av\_vote\_budget\_d}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `geom_smooth()` using formula = 'y ~ x'
+\end{verbatim}
+
+\includegraphics{Horror-movies_files/figure-latex/unnamed-chunk-17-1.pdf}
+We look into the linear regression for each the top three movie language
+estimating the R-squared and p-value to test the model fit.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{lr2 }\OtherTok{\textless{}{-}}\NormalTok{ sd\_horror\_movies\_w500000 }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{group\_by}\NormalTok{(Language) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{do}\NormalTok{(}\AttributeTok{model=}\FunctionTok{lm}\NormalTok{(}\AttributeTok{formula=}\NormalTok{vote\_average}\SpecialCharTok{\textasciitilde{}}\FunctionTok{log}\NormalTok{(budget), .))}
+\NormalTok{lr2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 3 x 2
+## # Rowwise: 
+##   Language           model 
+##   <chr>              <list>
+## 1 English            <lm>  
+## 2 Japanese           <lm>  
+## 3 Spanish; Castilian <lm>
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(lr2[[}\DecValTok{2}\NormalTok{]][[}\DecValTok{1}\NormalTok{]])}\SpecialCharTok{$}\NormalTok{coefficients}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##              Estimate Std. Error   t value     Pr(>|t|)
+## (Intercept) 0.6812006 0.31564577  2.158117 3.106924e-02
+## log(budget) 0.3120145 0.02063612 15.119828 2.467747e-48
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(lr2[[}\DecValTok{2}\NormalTok{]][[}\DecValTok{1}\NormalTok{]])}\SpecialCharTok{$}\NormalTok{r.squared}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.1266106
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(lr2[[}\DecValTok{2}\NormalTok{]][[}\DecValTok{2}\NormalTok{]])}\SpecialCharTok{$}\NormalTok{coefficients}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##              Estimate Std. Error  t value  Pr(>|t|)
+## (Intercept) 2.6849932  1.8952101 1.416726 0.1654029
+## log(budget) 0.2387745  0.1268042 1.883017 0.0680305
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(lr2[[}\DecValTok{2}\NormalTok{]][[}\DecValTok{2}\NormalTok{]])}\SpecialCharTok{$}\NormalTok{r.squared}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.09198813
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(lr2[[}\DecValTok{2}\NormalTok{]][[}\DecValTok{3}\NormalTok{]])}\SpecialCharTok{$}\NormalTok{coefficients}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##              Estimate Std. Error    t value  Pr(>|t|)
+## (Intercept) 0.4234114  5.1962819 0.08148352 0.9355986
+## log(budget) 0.3659685  0.3539137 1.03406153 0.3093716
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(lr2[[}\DecValTok{2}\NormalTok{]][[}\DecValTok{3}\NormalTok{]])}\SpecialCharTok{$}\NormalTok{r.squared}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.03441609
+\end{verbatim}
+
+Putting the R-squared and p-value for each group into a dataframe:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dat\_text2 }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}
+  \AttributeTok{label =} \FunctionTok{c}\NormalTok{(}\StringTok{"R = 0.127, p=0.001"}\NormalTok{, }\StringTok{"R = 0.092, p=0.068"}\NormalTok{, }\StringTok{"R = 0.034, p=0.309"}\NormalTok{),}
+  \AttributeTok{Language   =} \FunctionTok{c}\NormalTok{(}\StringTok{"English"}\NormalTok{, }\StringTok{"Japanese"}\NormalTok{, }\StringTok{"Spanish; Castilian"}\NormalTok{)}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Adding the R-squared and p-value for each group into the figure:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{av\_vote\_budget\_d\_wn }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(sd\_horror\_movies\_w500000, }\AttributeTok{mapping=}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{budget, }\AttributeTok{y=}\NormalTok{vote\_average, }\AttributeTok{color=}\NormalTok{Language)) }\SpecialCharTok{+} \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+} \FunctionTok{scale\_x\_log10}\NormalTok{() }\SpecialCharTok{+} \FunctionTok{facet\_grid}\NormalTok{(}\AttributeTok{cols=}\FunctionTok{vars}\NormalTok{(Language)) }\SpecialCharTok{+} \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{method=}\StringTok{"lm"}\NormalTok{, }\AttributeTok{color=}\StringTok{"black"}\NormalTok{, }\AttributeTok{level=}\ConstantTok{FALSE}\NormalTok{) }\SpecialCharTok{+} \FunctionTok{xlab}\NormalTok{(}\StringTok{"Budget (Log scale)"}\NormalTok{) }\SpecialCharTok{+} \FunctionTok{ylab}\NormalTok{(}\StringTok{"Vote average"}\NormalTok{) }\SpecialCharTok{+} \FunctionTok{ggtitle}\NormalTok{(}\StringTok{"Budget vs. vote average"}\NormalTok{) }\SpecialCharTok{+} \FunctionTok{theme\_bw}\NormalTok{() }\SpecialCharTok{+} \FunctionTok{geom\_text}\NormalTok{(}
+  \AttributeTok{data    =}\NormalTok{ dat\_text2,}
+  \AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =} \FloatTok{1e+05}\NormalTok{, }\AttributeTok{y =} \DecValTok{9}\NormalTok{, }\AttributeTok{label =}\NormalTok{ label),}
+  \AttributeTok{hjust   =} \SpecialCharTok{{-}}\FloatTok{0.1}\NormalTok{,}
+  \AttributeTok{vjust   =} \SpecialCharTok{{-}}\DecValTok{1}
+\NormalTok{)}
+
+\NormalTok{av\_vote\_budget\_d\_wn}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `geom_smooth()` using formula = 'y ~ x'
+\end{verbatim}
+
+\includegraphics{Horror-movies_files/figure-latex/unnamed-chunk-20-1.pdf}
+We have budget of the movies on X axis and its vote average on the Y
+axis. We looked into the top three language movies. Budget of movies in
+all three language found to have a very low positive correlation with
+its vote average. However, only English movies showed a significant
+correlation.
+
+We examine whether larger budget movies has higher popularity by
+plotting scatter plot of budget vs.~popularity for the three top
+language of movies(English, Japanese, Spanish) and linear regression:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{popu\_budget\_d }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(sd\_horror\_movies\_w500000, }\AttributeTok{mapping=}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{budget, }\AttributeTok{y=}\NormalTok{popularity, }\AttributeTok{color=}\NormalTok{Language)) }\SpecialCharTok{+} \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+} \FunctionTok{scale\_x\_log10}\NormalTok{() }\SpecialCharTok{+} \FunctionTok{facet\_grid}\NormalTok{(}\AttributeTok{cols=}\FunctionTok{vars}\NormalTok{(Language)) }\SpecialCharTok{+} \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{method=}\StringTok{"lm"}\NormalTok{, }\AttributeTok{color=}\StringTok{"black"}\NormalTok{, }\AttributeTok{level=}\ConstantTok{FALSE}\NormalTok{) }\SpecialCharTok{+} \FunctionTok{xlab}\NormalTok{(}\StringTok{"Budget (Log scale)"}\NormalTok{) }\SpecialCharTok{+} \FunctionTok{ylab}\NormalTok{(}\StringTok{"Popularity"}\NormalTok{) }\SpecialCharTok{+} \FunctionTok{ggtitle}\NormalTok{(}\StringTok{"Budget vs. popularity"}\NormalTok{) }\SpecialCharTok{+} \FunctionTok{theme\_bw}\NormalTok{()}
+\NormalTok{popu\_budget\_d}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `geom_smooth()` using formula = 'y ~ x'
+\end{verbatim}
+
+\includegraphics{Horror-movies_files/figure-latex/unnamed-chunk-21-1.pdf}
+
+We look into the linear regression for each the top three movie language
+estimating the R-squared and p-value to test the model fit.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{lr3 }\OtherTok{\textless{}{-}}\NormalTok{ sd\_horror\_movies\_w500000 }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{group\_by}\NormalTok{(Language) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{do}\NormalTok{(}\AttributeTok{model=}\FunctionTok{lm}\NormalTok{(}\AttributeTok{formula=}\NormalTok{popularity}\SpecialCharTok{\textasciitilde{}}\FunctionTok{log}\NormalTok{(budget), .))}
+\NormalTok{lr3}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 3 x 2
+## # Rowwise: 
+##   Language           model 
+##   <chr>              <list>
+## 1 English            <lm>  
+## 2 Japanese           <lm>  
+## 3 Spanish; Castilian <lm>
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(lr3[[}\DecValTok{2}\NormalTok{]][[}\DecValTok{1}\NormalTok{]])}\SpecialCharTok{$}\NormalTok{coefficients}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##               Estimate Std. Error   t value     Pr(>|t|)
+## (Intercept) -149.90024  19.524485 -7.677552 2.826570e-14
+## log(budget)   11.37172   1.276461  8.908788 1.389469e-18
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(lr3[[}\DecValTok{2}\NormalTok{]][[}\DecValTok{1}\NormalTok{]])}\SpecialCharTok{$}\NormalTok{r.squared}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.04791603
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(lr3[[}\DecValTok{2}\NormalTok{]][[}\DecValTok{2}\NormalTok{]])}\SpecialCharTok{$}\NormalTok{coefficients}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##              Estimate Std. Error    t value  Pr(>|t|)
+## (Intercept) -5.059776  21.792346 -0.2321813 0.8177494
+## log(budget)  1.092239   1.458077  0.7490957 0.4588048
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(lr3[[}\DecValTok{2}\NormalTok{]][[}\DecValTok{2}\NormalTok{]])}\SpecialCharTok{$}\NormalTok{r.squared}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.0157797
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(lr3[[}\DecValTok{2}\NormalTok{]][[}\DecValTok{3}\NormalTok{]])}\SpecialCharTok{$}\NormalTok{coefficients}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                Estimate Std. Error   t value   Pr(>|t|)
+## (Intercept) -106.637828  58.644851 -1.818366 0.07900574
+## log(budget)    8.529535   3.994243  2.135457 0.04100470
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(lr3[[}\DecValTok{2}\NormalTok{]][[}\DecValTok{3}\NormalTok{]])}\SpecialCharTok{$}\NormalTok{r.squared}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.1319489
+\end{verbatim}
+
+Putting the R-squared and p-value for each group into a dataframe:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dat\_text3 }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}
+  \AttributeTok{label =} \FunctionTok{c}\NormalTok{(}\StringTok{"R = 0.048, p=0.001"}\NormalTok{, }\StringTok{"R = 0.016, p=0.459"}\NormalTok{, }\StringTok{"R = 0.132, p=0.041"}\NormalTok{),}
+  \AttributeTok{Language   =} \FunctionTok{c}\NormalTok{(}\StringTok{"English"}\NormalTok{, }\StringTok{"Japanese"}\NormalTok{, }\StringTok{"Spanish; Castilian"}\NormalTok{)}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Adding the R-squared and p-value for each group into the figure:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{popu\_budget\_d\_wn }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(sd\_horror\_movies\_w500000, }\AttributeTok{mapping=}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{budget, }\AttributeTok{y=}\NormalTok{popularity, }\AttributeTok{color=}\NormalTok{Language)) }\SpecialCharTok{+} \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+} \FunctionTok{scale\_x\_log10}\NormalTok{() }\SpecialCharTok{+} \FunctionTok{facet\_grid}\NormalTok{(}\AttributeTok{cols=}\FunctionTok{vars}\NormalTok{(Language)) }\SpecialCharTok{+} \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{method=}\StringTok{"lm"}\NormalTok{, }\AttributeTok{color=}\StringTok{"black"}\NormalTok{, }\AttributeTok{level=}\ConstantTok{FALSE}\NormalTok{) }\SpecialCharTok{+} \FunctionTok{xlab}\NormalTok{(}\StringTok{"Budget (Log scale)"}\NormalTok{) }\SpecialCharTok{+} \FunctionTok{ylab}\NormalTok{(}\StringTok{"Popularity"}\NormalTok{) }\SpecialCharTok{+} \FunctionTok{ggtitle}\NormalTok{(}\StringTok{"Budget vs. popularity"}\NormalTok{) }\SpecialCharTok{+} \FunctionTok{theme\_bw}\NormalTok{() }\SpecialCharTok{+} \FunctionTok{geom\_text}\NormalTok{(}
+  \AttributeTok{data    =}\NormalTok{ dat\_text3,}
+  \AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =} \FloatTok{1e+05}\NormalTok{, }\AttributeTok{y =} \DecValTok{1550}\NormalTok{, }\AttributeTok{label =}\NormalTok{ label),}
+  \AttributeTok{hjust   =} \SpecialCharTok{{-}}\FloatTok{0.1}\NormalTok{,}
+  \AttributeTok{vjust   =} \SpecialCharTok{{-}}\DecValTok{1}
+\NormalTok{)}
+
+\NormalTok{popu\_budget\_d\_wn}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `geom_smooth()` using formula = 'y ~ x'
+\end{verbatim}
+
+\includegraphics{Horror-movies_files/figure-latex/unnamed-chunk-24-1.pdf}
+We have budget of the movies on X axis and its popularity on the Y axis.
+We looked into the top three language movies. Budget of movies in all
+three language were found to have a very low positive correlation with
+its popularity. However, only English movies showed a significant
+correlation.
+
+\end{document}
